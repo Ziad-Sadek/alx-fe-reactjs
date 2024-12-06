@@ -3,7 +3,7 @@ import React from "react";
 function MainContent () {
     return (
         <main>
-            <p>I love to visit New York, Paris, and Tokyo.</p>
+            <p style={{ border: '1px solid gray', padding: '10px', margin: '10px' }}>I love to visit <span style={{ fontWeight: 'bold', color: 'white' }}>New York, Paris, and Tokyo.</span></p>
         </main>
     );
 }
