@@ -1,11 +1,10 @@
-import React from "react";
-
-function Footer () {
+function Footer() {
     return (
-        <footer>
-            <p>© 2023 City Lovers</p>
-        </footer>
+      <footer style={{ padding: '10px', background: '#333', color: '#fff', textAlign: 'center' }}>
+        <p>&copy; 2024 Our Company. All rights reserved.</p>
+      </footer>
     );
-}
-
-export default Footer;
+  }
+  
+  export default Footer;
+  
