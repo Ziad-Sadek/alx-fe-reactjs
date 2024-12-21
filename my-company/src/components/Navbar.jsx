@@ -2,6 +2,20 @@ import React from "react";
 import { Link } from 'react-router-dom';
 
 function Navbar() {
+    const navbarStyle = {
+        backgroundColor: '#333', 
+        color: 'white',
+        padding: '10px', 
+        textAlign: 'center', 
+        boxShadow: '0 4px 2px -2px gray', 
+      };
+    
+      const linkStyle = {
+        color: 'white', 
+        textDecoration: 'none',
+        margin: '0 15px', 
+        fontSize: '18px', 
+      };
     return (
         <nav style={{ padding: '20px', background: '#333', color: '#fff' }}>
             <ul style={{ display: 'flex', justifyContent: 'space-around', listStyle: 'none', margin: 0, padding: 0}}>
