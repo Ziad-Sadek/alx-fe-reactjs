@@ -8,7 +8,7 @@ const AddRecipeForm = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        addRecipe({ id: Data.now(), title, description });
+        addRecipe({ id: Date.now(), title, description });
         setTitle('');
         setDescription('');
     };
@@ -23,7 +23,6 @@ const AddRecipeForm = () => {
              />
 
             <textarea 
-             type="text"
              value={description}
              onChange={(e) => setDescription(e.target.value)}
              placeholder="Description"
