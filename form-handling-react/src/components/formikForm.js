@@ -1,6 +1,8 @@
 import React from 'react';
 import { Formik, Field, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
+import RegistrationForm from './components/RegistrationForm'; // أو FormikForm
+
 
 const FormikForm = () => {
     const initialValues = {
