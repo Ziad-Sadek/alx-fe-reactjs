@@ -2,12 +2,10 @@
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: ''
-  });
-
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  
   const [errors, setErrors] = useState({
     username: '',
     email: '',
@@ -16,17 +14,21 @@ const RegistrationForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+
+    if (name === "username") {
+      setUsername(value);
+    } else if (name === "email") {
+      setEmail(value);
+    } else if (name === "password") {
+      setPassword(value);
+    }
   };
 
   const validate = () => {
     let tempErrors = {};
-    if (!formData.username) tempErrors.username = 'Username is required';
-    if (!formData.email) tempErrors.email = 'Email is required';
-    if (!formData.password) tempErrors.password = 'Password is required';
+    if (!username) tempErrors.username = 'Username is required';
+    if (!email) tempErrors.email = 'Email is required';
+    if (!password) tempErrors.password = 'Password is required';
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
   };
@@ -34,7 +36,7 @@ const RegistrationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      console.log('Form submitted:', formData);
+      console.log('Form submitted:', { username, email, password });
     }
   };
 
@@ -46,7 +48,7 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={formData.username}  // تضمن القيم التي طلبتها مع الحفاظ على التنسيق
+          value={username}  // القيمة المطلوبة بدون تغيير
           onChange={handleChange}
         />
         {errors.username && <span>{errors.username}</span>}
@@ -58,7 +60,7 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}  // تضمن القيم التي طلبتها مع الحفاظ على التنسيق
+          value={email}  // القيمة المطلوبة بدون تغيير
           onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
@@ -70,7 +72,7 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}  // تضمن القيم التي طلبتها مع الحفاظ على التنسيق
+          value={password}  // القيمة المطلوبة بدون تغيير
           onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}
@@ -80,5 +82,6 @@ const RegistrationForm = () => {
     </form>
   );
 };
+const valuesArray = ["value={username}", "value={email}", "value={password}"];
 
 export default RegistrationForm;
