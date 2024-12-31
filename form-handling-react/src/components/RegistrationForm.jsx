@@ -1,4 +1,4 @@
-
+// src/components/RegistrationForm.jsx
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
@@ -31,11 +31,9 @@ const RegistrationForm = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      
       console.log('Form submitted:', formData);
     }
   };
@@ -48,8 +46,8 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={formData.username} 
-          onChange={handleChange}  
+          value={formData.username}  // مع الحفاظ على التنسيق
+          onChange={handleChange}
         />
         {errors.username && <span>{errors.username}</span>}
       </div>
@@ -60,8 +58,8 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email} 
-          onChange={handleChange} 
+          value={formData.email}  // مع الحفاظ على التنسيق
+          onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
       </div>
@@ -72,8 +70,8 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password} 
-          onChange={handleChange} 
+          value={formData.password}  // مع الحفاظ على التنسيق
+          onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}
       </div>
