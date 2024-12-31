@@ -11,10 +11,10 @@ const fetchPosts = async () => {
 };
 
 function PostsComponent() {
-  // Using the useQuery hook with additional configurations
-  const { data, error, isLoading, isError, refetch } = useQuery(
-    'posts', 
-    fetchPosts, 
+  // Using the useQuery hook with advanced configurations
+  const { data, error, isLoading, isError } = useQuery(
+    'posts',
+    fetchPosts,
     {
       cacheTime: 1000 * 60 * 10,  // Cache data for 10 minutes (in milliseconds)
       staleTime: 1000 * 60 * 5,   // Data is fresh for 5 minutes (in milliseconds)
@@ -30,4 +30,23 @@ function PostsComponent() {
 
   // Handle error state
   if (isError) {
-    return <div>Error: {error.message}</div
+    return <div>Error: {error.message}</div>;
+  }
+
+  return (
+    <div>
+      <h1>Posts</h1>
+      {/* Display the posts list */}
+      <ul>
+        {data.map(post => (
+          <li key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.body}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default PostsComponent;
