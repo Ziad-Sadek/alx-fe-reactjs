@@ -5,12 +5,14 @@ import Profile from './components/Profile';
 import NotFound from './components/NotFound';
 import ProtectedRoute from './components/ProtectedRoute';
 import Post from './components/Post';
+import BlogPost from './components/BlogPost';
 
 
 function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/" element={<Home />} />
         <Route path="/profile/*" element={<ProtectedRoute><Profile /></ProtectedRoute>} />
