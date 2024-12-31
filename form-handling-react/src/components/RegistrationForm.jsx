@@ -14,7 +14,6 @@ const RegistrationForm = () => {
     password: ''
   });
 
-  // دالة لتحديث القيم في الحالة
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -23,7 +22,6 @@ const RegistrationForm = () => {
     });
   };
 
-  // دالة للتحقق من صحة البيانات
   const validate = () => {
     let tempErrors = {};
     if (!formData.username) tempErrors.username = 'Username is required';
@@ -33,11 +31,9 @@ const RegistrationForm = () => {
     return Object.keys(tempErrors).length === 0;
   };
 
-  // دالة لإرسال البيانات
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // إرسال البيانات إلى الـ API أو أي عملية أخرى
       console.log('Form submitted:', formData);
     }
   };
@@ -50,8 +46,8 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={formData.username}  // هنا القيمة مرتبطة بحالة formData
-          onChange={handleChange}    // تحديث الحالة عند التغيير
+          value={formData.username}  // تضمن القيم التي طلبتها مع الحفاظ على التنسيق
+          onChange={handleChange}
         />
         {errors.username && <span>{errors.username}</span>}
       </div>
@@ -62,8 +58,8 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={formData.email}  // هنا القيمة مرتبطة بحالة formData
-          onChange={handleChange} // تحديث الحالة عند التغيير
+          value={formData.email}  // تضمن القيم التي طلبتها مع الحفاظ على التنسيق
+          onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
       </div>
@@ -74,8 +70,8 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={formData.password}  // هنا القيمة مرتبطة بحالة formData
-          onChange={handleChange}    // تحديث الحالة عند التغيير
+          value={formData.password}  // تضمن القيم التي طلبتها مع الحفاظ على التنسيق
+          onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}
       </div>
