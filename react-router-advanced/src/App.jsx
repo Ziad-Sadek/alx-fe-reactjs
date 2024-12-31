@@ -12,6 +12,14 @@ function App() {
   return (
     <Router>
       <Routes>
+                {/* Protected route for Profile */}
+          <Route 
+          path="/profile" 
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }  />
         <Route path="/blog/:id" element={<BlogPost />} />
         <Route path="/post/:postId" element={<Post />} />
         <Route path="/" element={<Home />} />
