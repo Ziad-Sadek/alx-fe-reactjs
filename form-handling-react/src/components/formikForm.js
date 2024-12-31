@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import RegistrationForm from './components/RegistrationForm';
 
 
-const FormikForm = () => {
+const formikForm = () => {
     const initialValues = {
         username: '',
         email: '',
@@ -52,4 +52,4 @@ const FormikForm = () => {
     );
 };
 
-export default FormikForm;
+export default formikForm;
