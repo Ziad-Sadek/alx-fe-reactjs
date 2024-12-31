@@ -1,4 +1,4 @@
-// src/components/RegistrationForm.jsx
+
 import React, { useState } from 'react';
 
 const RegistrationForm = () => {
@@ -48,7 +48,7 @@ const RegistrationForm = () => {
           type="text"
           id="username"
           name="username"
-          value={username}  // القيمة المطلوبة بدون تغيير
+          value={username} 
           onChange={handleChange}
         />
         {errors.username && <span>{errors.username}</span>}
@@ -60,7 +60,7 @@ const RegistrationForm = () => {
           type="email"
           id="email"
           name="email"
-          value={email}  // القيمة المطلوبة بدون تغيير
+          value={email} 
           onChange={handleChange}
         />
         {errors.email && <span>{errors.email}</span>}
@@ -72,7 +72,7 @@ const RegistrationForm = () => {
           type="password"
           id="password"
           name="password"
-          value={password}  // القيمة المطلوبة بدون تغيير
+          value={password}
           onChange={handleChange}
         />
         {errors.password && <span>{errors.password}</span>}
