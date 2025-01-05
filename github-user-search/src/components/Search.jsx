@@ -17,7 +17,7 @@ const Search = () => {
       const data = await githubService.fetchUserData(username); // Fetch data from API
       setUserData(data); // Update user data state with the fetched data
     } catch (err) {
-      setError('Looks like we can\'t find the user'); // Set error if API fails
+      setError('Looks like we cant find the user'); // Set error if API fails
     } finally {
       setLoading(false);
     }
@@ -35,11 +35,11 @@ const Search = () => {
         <button type="submit">Search</button>
       </form>
       {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>}  {/* Display the error message exactly as requested */}
       {userData && !loading && !error && (
         <div>
           <h3>{userData.name}</h3>
-          <p>GitHub Username: {userData.login}</p>  {/* Display the GitHub login (username) */}
+          <p>login: {userData.login}</p>  {/* Display GitHub login exactly as requested */}
           <p>{userData.bio}</p>
           <img src={userData.avatar_url} alt="User Avatar" width="100" />
           <p>
