@@ -1,10 +1,15 @@
 import axios from 'axios';
 
-export const fetchUserData = async (username) => {
+const fetchUserData = async (username, location, minRepos) => {
+  const query = `type:user+in:login ${username} location:${location ? location : ''} repos:>=${minRepos}`;
+  const url = `https://api.github.com/search/users?q=${query}`;
+
   try {
-    const response = await axios.get(`https://api.github.com/users/${username}`);
+    const response = await axios.get(url);
     return response.data;
   } catch (error) {
-    throw new Error('User not found');
+    throw new Error('Error fetching data from GitHub');
   }
 };
+
+export { fetchUserData };
