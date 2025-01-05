@@ -70,6 +70,15 @@ const Search = () => {
               </p>
             </div>
           ))}
+
+          {/* Pagination (if more than one page of results) */}
+          {userData.total_count > 30 && (
+            <div className="mt-4 text-center">
+              <button className="p-2 bg-blue-500 text-white rounded-md">
+                Load More
+              </button>
+            </div>
+          )}
         </div>
       )}
     </div>
