@@ -1,57 +1,48 @@
-import React, { useState } from "react";
-import githubService from "../services/githubService"; // Import the githubService
+import { useState } from 'react';
+import { fetchUserData } from '../services/githubService';
 
 const Search = () => {
-  // State for the search term, user data, loading, and error
-  const [username, setUsername] = useState(""); // Search input
-  const [userData, setUserData] = useState(null); // Store fetched user data
-  const [loading, setLoading] = useState(false); // State to track loading
-  const [error, setError] = useState(""); // State to track error
+  const [username, setUsername] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  // Handle input change in the search field
-  const handleInputChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  // Handle form submission to fetch user data
-  const handleSubmit = async (e) => {
+  const handleSearch = async (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true while fetching data
-    setError(""); // Reset any previous error message
-
+    setLoading(true);
+    setError('');
+    setUserData(null);
+    
     try {
-      // Call the fetchUserData function from githubService to get data
-      const data = await githubService.fetchUserData(username);
-      setUserData(data); // Set the fetched data
+      const data = await fetchUserData(username);
+      setUserData(data);
     } catch (err) {
-      // If there's an error, set the error state
-      setError("Looks like we cant find the user");
+      setError('Looks like we cant find the user');
     } finally {
-      setLoading(false); // Reset loading state once the API call is complete
+      setLoading(false);
     }
   };
 
   return (
-    <div className="search-container">
-      <form onSubmit={handleSubmit} className="search-form">
+    <div>
+      <form onSubmit={handleSearch} className="p-4">
         <input
           type="text"
           value={username}
-          onChange={handleInputChange}
-          placeholder="Enter GitHub username"
-          className="search-input"
+          onChange={(e) => setUsername(e.target.value)}
+          placeholder="Enter GitHub Username"
+          className="p-2 border"
         />
-        <button type="submit" className="search-button">Search</button>
+        <button type="submit" className="p-2 bg-blue-500 text-white">Search</button>
       </form>
 
-      {/* Conditional rendering */}
       {loading && <p>Loading...</p>}
       {error && <p>{error}</p>}
       {userData && (
-        <div className="user-info">
-          <img src={userData.avatar_url} alt="Avatar" className="avatar" />
-          <h2>{userData.name}</h2>
-          <p>Username: {userData.login}</p> {/* This is where the "login" is displayed */}
+        <div className="p-4">
+          <img src={userData.avatar_url} alt={userData.login} className="w-32 h-32" />
+          <p>Username: {userData.login}</p>
+          <p>Name: {userData.name}</p>
           <a href={userData.html_url} target="_blank" rel="noopener noreferrer">View Profile</a>
         </div>
       )}
