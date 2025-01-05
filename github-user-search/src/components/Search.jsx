@@ -1,88 +1,57 @@
-// src/components/Search.jsx
-import React, { useState } from 'react';
-import githubService from '../services/githubService';  // Importing API service
+import React, { useState } from "react";
+import githubService from "../services/githubService"; // Import the githubService
 
 const Search = () => {
-  const [username, setUsername] = useState(''); // State for username input
-  const [location, setLocation] = useState(''); // State for location input
-  const [minRepos, setMinRepos] = useState(0); // State for minimum repositories input
-  const [userData, setUserData] = useState(null); // State for user data
-  const [loading, setLoading] = useState(false); // Loading state
-  const [error, setError] = useState(''); // Error state
+  // State for the search term, user data, loading, and error
+  const [username, setUsername] = useState(""); // Search input
+  const [userData, setUserData] = useState(null); // Store fetched user data
+  const [loading, setLoading] = useState(false); // State to track loading
+  const [error, setError] = useState(""); // State to track error
 
-  // Function to handle the search request
-  const handleSearch = async (e) => {
+  // Handle input change in the search field
+  const handleInputChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  // Handle form submission to fetch user data
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError('');
-    setUserData(null);  // Reset previous results
+    setLoading(true); // Set loading to true while fetching data
+    setError(""); // Reset any previous error message
 
     try {
-      const data = await githubService.fetchUserData(username, location, minRepos); // Fetch from API
-      setUserData(data); // Store the result
+      // Call the fetchUserData function from githubService to get data
+      const data = await githubService.fetchUserData(username);
+      setUserData(data); // Set the fetched data
     } catch (err) {
-      setError('Looks like we cant find the user'); // Display error message
+      // If there's an error, set the error state
+      setError("Looks like we cant find the user");
     } finally {
-      setLoading(false);
+      setLoading(false); // Reset loading state once the API call is complete
     }
   };
 
   return (
-    <div className="p-4">
-      {/* Search form */}
-      <form onSubmit={handleSearch} className="space-y-4 max-w-lg mx-auto">
-        {/* Username Input */}
+    <div className="search-container">
+      <form onSubmit={handleSubmit} className="search-form">
         <input
           type="text"
-          placeholder="Search GitHub Username"
           value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md"
+          onChange={handleInputChange}
+          placeholder="Enter GitHub username"
+          className="search-input"
         />
-        {/* Location Input */}
-        <input
-          type="text"
-          placeholder="Location (Optional)"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md"
-        />
-        {/* Minimum Repositories Input */}
-        <input
-          type="number"
-          placeholder="Minimum Repositories"
-          value={minRepos}
-          onChange={(e) => setMinRepos(e.target.value)}
-          className="w-full p-2 border border-gray-300 rounded-md"
-        />
-        {/* Search Button */}
-        <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded-md">
-          Search
-        </button>
+        <button type="submit" className="search-button">Search</button>
       </form>
 
-      {/* Loading State */}
-      {loading && <p className="mt-4">Loading...</p>}
-
-      {/* Error State */}
-      {error && <p className="mt-4 text-red-500">{error}</p>}
-
-      {/* Displaying User Data */}
-      {userData && !loading && !error && (
-        <div className="mt-4">
-          {userData.items.map((user) => (
-            <div key={user.id} className="border p-4 rounded-md mb-4">
-              <h3 className="font-bold text-xl">{user.login}</h3>
-              <p>Location: {user.location || 'Not Provided'}</p>
-              <p>Repositories: {user.public_repos}</p>
-              <img src={user.avatar_url} alt="User Avatar" width="100" className="rounded-full" />
-              <p>
-                <a href={user.html_url} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                  View GitHub Profile
-                </a>
-              </p>
-            </div>
-          ))}
+      {/* Conditional rendering */}
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      {userData && (
+        <div className="user-info">
+          <img src={userData.avatar_url} alt="Avatar" className="avatar" />
+          <h2>{userData.name}</h2>
+          <a href={userData.html_url} target="_blank" rel="noopener noreferrer">View Profile</a>
         </div>
       )}
     </div>
