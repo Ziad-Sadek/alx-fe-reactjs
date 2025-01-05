@@ -1,22 +1,23 @@
 // src/components/Search.jsx
 import React, { useState } from 'react';
-import githubService from '../services/githubService';
+import githubService from '../services/githubService';  // Importing API service
 
 const Search = () => {
-  const [username, setUsername] = useState('');
-  const [userData, setUserData] = useState(null); 
-  const [loading, setLoading] = useState(false); 
-  const [error, setError] = useState(''); 
+  const [username, setUsername] = useState('');  // State for input field
+  const [userData, setUserData] = useState(null); // State to store user data from API
+  const [loading, setLoading] = useState(false);  // State for loading status
+  const [error, setError] = useState(''); // State for error message
 
   const handleSearch = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
+    setUserData(null);  // Clear previous user data before fetching new data
     try {
-      const data = await githubService.fetchUserData(username);
-      setUserData(data); 
+      const data = await githubService.fetchUserData(username); // Fetch data from API
+      setUserData(data); // Update user data state with the fetched data
     } catch (err) {
-      setError('Looks like we can\'t find the user');
+      setError('Looks like we can\'t find the user'); // Set error if API fails
     } finally {
       setLoading(false);
     }
@@ -38,6 +39,7 @@ const Search = () => {
       {userData && !loading && !error && (
         <div>
           <h3>{userData.name}</h3>
+          <p>GitHub Username: {userData.login}</p>  {/* Display the GitHub login (username) */}
           <p>{userData.bio}</p>
           <img src={userData.avatar_url} alt="User Avatar" width="100" />
           <p>
