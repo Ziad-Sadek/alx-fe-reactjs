@@ -1,16 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import data from '../data.json';  // Importing the mock data
+import data from '../data.json'; 
+import AddRecipeForm from "./components/AddRecipeForm";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
-    // Simulating fetching the mock data
+  
     setRecipes(data);
   }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto px-4 py-6">
+      <AddRecipeForm />
       <h1 className="text-3xl font-semibold text-center mb-8">Recipe Sharing Platform</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {recipes.map((recipe) => (

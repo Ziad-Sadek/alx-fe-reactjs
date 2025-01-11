@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import data from '../data.json';  // Importing the mock data
+import data from '../data.json';  
 
 const RecipeDetail = () => {
-  const { id } = useParams();  // Access the recipe ID from the URL
+  const { id } = useParams(); 
   const [recipe, setRecipe] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Find the recipe by its ID
+    
     const recipeData = data.find((item) => item.id === parseInt(id));
     setRecipe(recipeData);
   }, [id]);
@@ -33,7 +33,6 @@ const RecipeDetail = () => {
           <p className="text-gray-600 mt-2">{recipe.summary}</p>
         </div>
 
-        {/* Ingredients Section */}
         <div className="bg-gray-50 p-6 mt-6 rounded-lg shadow">
           <h2 className="text-2xl font-semibold text-gray-800">Ingredients</h2>
           <ul className="list-disc list-inside mt-2 text-gray-600">
@@ -43,7 +42,7 @@ const RecipeDetail = () => {
           </ul>
         </div>
 
-        {/* Cooking Instructions Section */}
+       
         <div className="bg-gray-50 p-6 mt-6 rounded-lg shadow">
           <h2 className="text-2xl font-semibold text-gray-800">Cooking Instructions</h2>
           <ol className="list-decimal list-inside mt-2 text-gray-600">
