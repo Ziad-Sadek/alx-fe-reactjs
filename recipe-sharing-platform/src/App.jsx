@@ -1,14 +1,14 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom"; // Correct imports from react-router-dom
-import HomePage from "./components/HomePage"; // Import HomePage component
-import RecipeDetail from "./components/RecipeDetail"; // Import RecipeDetail component
-
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import HomePage from "./components/HomePage";
+import RecipeDetail from "./components/RecipeDetail";
+import Link from "react-router-dom";
 function App() {
   return (
-    <Router> {/* Wrap your Routes with Router */}
+    <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} /> {/* Route for HomePage */}
-        <Route path="/recipe/:id" element={<RecipeDetail />} /> {/* Route for RecipeDetail */}
+        <Route path="/" element={<HomePage />} /> 
+        <Route path="/recipe/:id" element={<RecipeDetail />} /> 
       </Routes>
     </Router>
   );
