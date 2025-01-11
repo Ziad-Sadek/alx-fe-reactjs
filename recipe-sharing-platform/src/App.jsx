@@ -18,7 +18,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} /> 
         <Route path="/recipe/:id" element={<RecipeDetail />} /> 
-        <Link to={`/recipe/${recipe.id}`} className="mt-4 inline-block text-blue-500 hover:underline"></Link>
+        <Link to={`/recipe/${recipe.id}`} className="mt-4 inline-block text-blue-500 hover:underline">
+        View Recipe
+              </Link>
       </Routes>
     </Router>
   );
