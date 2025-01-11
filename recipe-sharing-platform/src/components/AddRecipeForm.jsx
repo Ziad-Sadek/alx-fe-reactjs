@@ -6,14 +6,12 @@ const AddRecipeForm = () => {
   const [ingredients, setIngredients] = useState('');
   const [preparation, setPreparation] = useState('');
 
-
   const [errors, setErrors] = useState({
     title: '',
     ingredients: '',
     preparation: '',
   });
 
-  
   const validateForm = () => {
     const newErrors = { title: '', ingredients: '', preparation: '' };
     let isValid = true;
@@ -70,7 +68,6 @@ const AddRecipeForm = () => {
           {errors.title && <p className="text-red-500 text-sm">{errors.title}</p>}
         </div>
 
-        
         <div className="mb-4">
           <label htmlFor="ingredients" className="block text-lg font-semibold">Ingredients (One per line)</label>
           <textarea
@@ -84,7 +81,6 @@ const AddRecipeForm = () => {
           {errors.ingredients && <p className="text-red-500 text-sm">{errors.ingredients}</p>}
         </div>
 
-        
         <div className="mb-4">
           <label htmlFor="preparation" className="block text-lg font-semibold">Preparation Steps</label>
           <textarea
@@ -98,7 +94,7 @@ const AddRecipeForm = () => {
           {errors.preparation && <p className="text-red-500 text-sm">{errors.preparation}</p>}
         </div>
 
-      
+        {/* Submit Button */}
         <button
           type="submit"
           className="w-full p-3 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition duration-300"
