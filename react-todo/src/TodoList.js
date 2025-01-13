@@ -1,5 +1,54 @@
 import React, { useState } from "react";
 
+
+const AddTodoForm = ({ newTodo, setNewTodo, handleAddTodo }) => {
+  return (
+    <form onSubmit={handleAddTodo}>
+      <input
+        type="text"
+        value={newTodo}
+        onChange={(e) => setNewTodo(e.target.value)}
+        placeholder="Add a new todo"
+        required
+      />
+      <button type="submit">Add Todo</button>
+    </form>
+  );
+};
+
+
+const TodoItem = ({ todo, handleToggleTodo, handleDeleteTodo }) => {
+  return (
+    <li
+      key={todo.id}
+      style={{
+        textDecoration: todo.completed ? "line-through" : "none",
+        cursor: "pointer",
+      }}
+      onClick={() => handleToggleTodo(todo.id)}
+    >
+      {todo.text}
+      <button
+        onClick={(e) => {
+          e.stopPropagation(); 
+          handleDeleteTodo(todo.id);
+        }}
+        style={{
+          marginLeft: "10px",
+          backgroundColor: "red",
+          color: "white",
+          border: "none",
+          borderRadius: "4px",
+          padding: "5px 10px",
+          cursor: "pointer",
+        }}
+      >
+        Delete
+      </button>
+    </li>
+  );
+};
+
 const TodoList = () => {
   const [todos, setTodos] = useState([
     { id: 1, text: "Buy groceries", completed: false },
@@ -34,29 +83,20 @@ const TodoList = () => {
   return (
     <div>
       <h1>Todo List</h1>
-      <form onSubmit={handleAddTodo}>
-        <input
-          type="text"
-          value={newTodo}
-          onChange={(e) => setNewTodo(e.target.value)}
-          placeholder="Add a new todo"
-        />
-        <button type="submit">Add Todo</button>
-      </form>
+
+      <AddTodoForm
+        newTodo={newTodo}
+        setNewTodo={setNewTodo}
+        handleAddTodo={handleAddTodo}
+      />
       <ul>
         {todos.map((todo) => (
-          <li
+          <TodoItem
             key={todo.id}
-            style={{
-              textDecoration: todo.completed ? "line-through" : "none",
-            }}
-            onClick={() => handleToggleTodo(todo.id)}
-          >
-            {todo.text}
-            <button onClick={(e) => { e.stopPropagation(); handleDeleteTodo(todo.id); }}>
-              Delete
-            </button>
-          </li>
+            todo={todo}
+            handleToggleTodo={handleToggleTodo}
+            handleDeleteTodo={handleDeleteTodo}
+          />
         ))}
       </ul>
     </div>
