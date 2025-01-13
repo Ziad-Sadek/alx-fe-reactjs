@@ -65,6 +65,7 @@ const TodoList = () => {
         { id: Date.now(), text: newTodo, completed: false },
       ]);
       setNewTodo("");
+      document.querySelector("input").focus();
     }
   };
 
